@@ -1,0 +1,31 @@
+# Ignorar a pasta de build
+[Bb]in/
+[Oo]bj/
+
+# Ignorar a pasta de cache e configurações do Visual Studio
+.vs/
+
+# Ignorar arquivos temporários e de configuração do usuário
+*.suo
+*.user
+*.log
+*.pdb
+*.tlog
+*.suo
+*.bak
+*.~*
+
+# Ignorar pacotes NuGet
+packages/
+
+# Ignorar arquivos de pacotes de testes
+TestResults/
+
+# Ignorar arquivos de pacote de deployment
+*.nupkg
+
+# Ignorar arquivos do Rider e outros IDEs
+.idea/
+
+# Pastas e arquivos do Visual Studio
+.vs/

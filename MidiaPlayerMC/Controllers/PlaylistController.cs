@@ -15,7 +15,7 @@ namespace MidiaPlayerMC.Controllers
             _playlistService = playlistService;
         }
 
-        [HttpGet(Name = "GetAllMedia")]
+        [HttpGet(Name = "GetAllPlayList")]
         public async Task<ActionResult<List<PlaylistOutputDto>>> GetAll()
         {
             return Ok(await _playlistService.GetAllAsync());
@@ -29,14 +29,14 @@ namespace MidiaPlayerMC.Controllers
             return Ok(media);
         }
 
-        [HttpPost(Name = "InsertMedia")]
-        public async Task<ActionResult<PlaylistOutputDto>> Create([FromQuery] PlaylistInputDto input)
+        [HttpPost(Name = "InsertPlaylist")]
+        public async Task<ActionResult<PlaylistOutputDto>> Create([FromQuery] InsertPlaylistInputDto input)
         {
             var created = await _playlistService.CreateAsync(input);
             return CreatedAtAction(nameof(GetById), new { id = created.PlaylistNumber }, created);
         }
 
-        [HttpPut(Name = "UpdateMedia")]
+        [HttpPut(Name = "UpdatePlaylist")]
         public async Task<ActionResult<PlaylistOutputDto>> Update([FromQuery] PlaylistInputDto input)
         {
             var updated = await _playlistService.UpdateAsync(input);

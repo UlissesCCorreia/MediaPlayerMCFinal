@@ -11,10 +11,17 @@ namespace MidiaPlayerMC.Data
 
         public DbSet<Media> Medias { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<MediaPlaylist> MediaPlaylists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuração da relação muitos-para-muitos
+            modelBuilder.Entity<MediaPlaylist>().
+                HasKey(mp => mp.Id);
+
+            modelBuilder.Entity<MediaPlaylist>().
+                Property(mp => mp.Id).
+                ValueGeneratedOnAdd();
+
             modelBuilder.Entity<MediaPlaylist>().
                 HasKey(mp => new { mp.MediaId, mp.PlaylistId });
 

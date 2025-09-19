@@ -6,7 +6,7 @@ namespace MidiaPlayerMC.Interfaces
     {
         Task<List<PlaylistOutputDto>> GetAllAsync();
         Task<PlaylistOutputDto> GetByIdAsync(int id);
-        Task<PlaylistOutputDto> CreateAsync(PlaylistInputDto input);
+        Task<PlaylistOutputDto> CreateAsync(InsertPlaylistInputDto input);
         Task<PlaylistOutputDto> UpdateAsync(PlaylistInputDto input);
     }
 }

@@ -15,7 +15,7 @@ namespace MidiaPlayerMC.Services
             _context = context;
         }
 
-        public async Task<PlaylistOutputDto> CreateAsync(PlaylistInputDto input)
+        public async Task<PlaylistOutputDto> CreateAsync(InsertPlaylistInputDto input)
         {
             try
             {

@@ -19,6 +19,7 @@ public class MediaService : IMediaInterface
         try
         {
             return await _context.Medias
+            .Where(m => m.IsActive)
             .Select(m => new MediaOutputDto
             {
                 Id = m.Id,

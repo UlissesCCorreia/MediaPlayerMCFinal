@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+Ôªøusing Microsoft.EntityFrameworkCore;
 using MidiaPlayerMC.Data;
 using MidiaPlayerMC.Interfaces;
 using MidiaPlayerMC.Models;
@@ -6,18 +6,31 @@ using MidiaPlayerMC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Adicione o servi√ßo de CORS aqui, antes do builder.Services.Build()
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin() // Permite qualquer origem.
+                   .AllowAnyMethod() // Permite qualquer m√©todo (GET, POST, etc.).
+                   .AllowAnyHeader(); // Permite qualquer cabe√ßalho.
+        });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// JunÁ„o das Interfaces com as Classes RepositÛrios
+// Jun√ß√£o das Interfaces com as Classes Reposit√≥rios
 builder.Services.AddScoped<IMediaInterface, MediaService>();
 builder.Services.AddScoped<IPlaylistInterface, PlaylistService>();
+builder.Services.AddScoped<IMediaPlaylistInterface, MediaPlaylistService>();
 
-// Configurando a conex„o com o banco de dados adicionando a dependÍncia.
+builder.Services.AddHttpClient();
+
+// Configurando a conex√£o com o banco de dados adicionando a depend√™ncia.
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -29,6 +42,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
